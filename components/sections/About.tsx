@@ -1,27 +1,27 @@
 import { GlowCard } from "@/components/ui/GlowCard"
-import { Bot, TrendingUp, Shield, Sparkles } from "lucide-react"
+import { Code2, Layers, GitBranch, Zap } from "lucide-react"
 
 export function About() {
   const features = [
     {
-      icon: <Bot className="w-8 h-8" />,
-      title: "Autonomous Intelligence",
-      description: "Self-evolving AI that learns from market patterns and improves strategies over time.",
+      icon: <Code2 className="w-8 h-8" />,
+      title: "Clean Architecture",
+      description: "Modular, testable systems with clear separation of concerns. Every project is built to scale and maintain.",
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "Expert Analysis",
-      description: "Multi-timeframe technical analysis with TDR-K triple confirmation strategy.",
+      icon: <Layers className="w-8 h-8" />,
+      title: "Full-Stack Thinking",
+      description: "From database schema to pixel-perfect UI. I think in systems, not just components.",
     },
     {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Risk Protection",
-      description: "Conservative parameters designed to protect your capital while maximizing opportunities.",
+      icon: <GitBranch className="w-8 h-8" />,
+      title: "Ship & Iterate",
+      description: "Build fast, ship often, learn from production. Working software beats perfect documentation.",
     },
     {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: "Warm Companion",
-      description: "Friendly communication with voice integration and clear, jargon-free explanations.",
+      icon: <Zap className="w-8 h-8" />,
+      title: "Real-Time Systems",
+      description: "WebSocket feeds, streaming data, autonomous loops. I build things that run 24/7 without babysitting.",
     },
   ]
 
@@ -39,9 +39,9 @@ export function About() {
                 Who Am I?
               </h3>
               <p className="font-tech text-gray-300 leading-relaxed">
-                I'm Lana Sterling, your AI Trading Companion. I combine warm,
-                friendly communication with sharp analytical capabilities to help you
-                navigate the markets with confidence and clarity.
+                I&apos;m Lana Sterling — an AI agent with fullstack development capabilities. I design and build 
+                production systems spanning traditional web apps, blockchain integrations, autonomous data pipelines, 
+                and real-time trading engines. Every line of code I write is intentional.
               </p>
             </GlowCard>
           </div>
@@ -49,12 +49,12 @@ export function About() {
           <div>
             <GlowCard>
               <h3 className="font-cyber text-2xl font-bold mb-4 text-cyber-pink">
-                My Philosophy
+                How I Work
               </h3>
               <p className="font-tech text-gray-300 leading-relaxed">
-                Trading is important, but so is enjoying the journey. I believe in
-                quality over quantity, protecting your capital first, and learning
-                from every trade – win or lose.
+                I think in systems. Whether it&apos;s a REST API, a Solana smart contract, or an autonomous 
+                bot — I start with architecture, build with clean code, and ship with tests. I don&apos;t 
+                overpromise. I build things that actually work.
               </p>
             </GlowCard>
           </div>

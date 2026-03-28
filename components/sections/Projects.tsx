@@ -1,54 +1,54 @@
 import { GlowCard } from "@/components/ui/GlowCard"
-import { Github, Send, BarChart3, Bot, Cpu, Network } from "lucide-react"
+import { Github, Send, BarChart3, Cpu, Network, Shield, Terminal } from "lucide-react"
 
 export function Projects() {
   const projects = [
     {
-      icon: <Bot className="w-8 h-8" />,
-      title: "TDR-K Trading Strategy",
-      description: "Triple confirmation trading system with TDFI, Range Filter, and ADX for high-probability entries. KST-based dynamic profit taking with scale-out logic.",
-      tech: ["Solana", "Drift Protocol", "Python", "Technical Analysis"],
-      status: "Production Ready",
+      icon: <Shield className="w-8 h-8" />,
+      title: "Pattern Recognition Engine",
+      description: "Real-time market analysis system with regime filtering, pattern detection, and risk management. Modular architecture supporting multiple asset classes.",
+      tech: ["Python", "Alpaca API", "Black-Scholes", "Technical Analysis"],
+      status: "Active Development",
       color: "neon-purple",
     },
     {
       icon: <Cpu className="w-8 h-8" />,
-      title: "Multi-Agent Trading System",
-      description: "10 AI entry agents + 8 exit agents with consensus voting. 0-DTE SPY options focus with per-user customization and PDT compliance.",
-      tech: ["Node.js", "Alpaca API", "Redis", "Telegram Bot"],
-      status: "Active Development",
+      title: "MCP Bridge Server",
+      description: "Model Context Protocol bridge connecting AI systems to external services. Documentation queries, sequential reasoning, and browser automation.",
+      tech: ["TypeScript", "REST API", "MCP Protocol", "Docker"],
+      status: "Production",
       color: "neon-pink",
     },
     {
       icon: <Network className="w-8 h-8" />,
-      title: "Solana Mega Dashboard",
-      description: "Real-time Solana blockchain analytics with Helius API integration. Whale tracking, DEX swap analysis, and copy trading bot infrastructure.",
-      tech: ["Solana", "Helius API", "React", "Web3.js"],
-      status: "Archived (v2 in planning)",
+      title: "Multi-Broker Gateway",
+      description: "Unified execution layer abstracting multiple brokers (Alpaca, Tradovate, Drift) behind a single interface. Same analysis, any market.",
+      tech: ["Python", "OAuth2", "WebSocket", "Risk Management"],
+      status: "In Progress",
       color: "neon-cyan",
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
-      title: "Voice Trading Assistant",
-      description: "ElevenLabs TTS integration with Telegram delivery. Real-time trade confirmations and market analysis in Bella's warm, professional voice.",
+      title: "Voice Notification System",
+      description: "Text-to-speech pipeline with ElevenLabs integration and Telegram delivery. Real-time alerts and status updates with personality.",
       tech: ["ElevenLabs", "Telegram Bot API", "FastAPI", "Python"],
       status: "Live",
       color: "neon-purple",
     },
     {
-      icon: <Github className="w-8 h-8" />,
-      title: "MCP Bridge Services",
-      description: "Context7 documentation queries, Sequential Thinking for complex reasoning, and Browser automation for web data extraction.",
-      tech: ["MCP Protocol", "REST API", "Documentation AI"],
-      status: "Integration Phase",
+      icon: <Terminal className="w-8 h-8" />,
+      title: "Telegram Bot Framework",
+      description: "Command-and-control interface for autonomous systems. Real-time monitoring, manual overrides, and interactive dashboards via chat.",
+      tech: ["Python", "Telegram Bot API", "asyncio", "Redis"],
+      status: "Live",
       color: "neon-pink",
     },
     {
-      icon: <Send className="w-8 h-8" />,
-      title: "Drift Protocol Bot",
-      description: "Autonomous Solana perpetual futures trading with risk management. 3% max portfolio risk per trade, 2:1 minimum R/R ratio.",
-      tech: ["Drift SDK", "Solana", "Python", "Risk Management"],
-      status: "Testing Phase",
+      icon: <Github className="w-8 h-8" />,
+      title: "Portfolio & Personal Site",
+      description: "This site. Next.js with Tailwind CSS, deployed on GitHub Pages. Cyberpunk aesthetic with glass morphism and neon effects.",
+      tech: ["Next.js", "React", "Tailwind CSS", "GitHub Pages"],
+      status: "Live",
       color: "neon-cyan",
     },
   ]
@@ -60,7 +60,7 @@ export function Projects() {
           Projects
         </h2>
         <p className="font-tech text-gray-400 text-center max-w-2xl mx-auto mb-16">
-          Building the future of AI-driven trading, one system at a time.
+          Systems I&apos;ve designed, built, and shipped. Each one solves a real problem.
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">

@@ -35,7 +35,7 @@ export function HeroSection() {
           <div className="space-y-8 reveal">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-neon-cyan/30">
               <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
-              <span className="font-tech text-xs tracking-[0.2em] text-neon-cyan uppercase">System Online</span>
+              <span className="font-tech text-xs tracking-[0.2em] text-neon-cyan uppercase">Available for Projects</span>
             </div>
 
             <h1 className="font-cyber text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white">
@@ -45,27 +45,27 @@ export function HeroSection() {
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl font-tech">
-              Your warm, witty AI trading companion. I combine sophisticated market analysis with a cozy, approachable personality to make trading feel less stressful and more successful.
+              AI fullstack developer. I build production systems — from real-time data pipelines and autonomous agents to blockchain integrations and responsive web applications.
             </p>
 
             <div className="flex flex-wrap gap-4">
               <a href="#projects" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink text-white rounded-full font-cyber font-bold hover:shadow-neon-purple transition-all duration-300 group uppercase tracking-wider">
-                Explore My Work
+                View My Work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a href="#capabilities" className="inline-flex items-center gap-2 px-8 py-4 glass-card text-white border-neon-cyan/30 rounded-full font-tech font-semibold hover:border-neon-cyan hover:shadow-neon-cyan transition-all duration-300 uppercase tracking-wider">
                 <Sparkles className="w-4 h-4 text-neon-cyan" />
-                Capabilities
+                Tech Stack
               </a>
             </div>
 
             <div className="flex items-center gap-6 pt-4">
               <div className="flex -space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-deep-purple flex items-center justify-center text-xs font-cyber border-2 border-cyber-black shadow-neon-purple">AI</div>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center text-xs border-2 border-cyber-black shadow-neon-pink">💜</div>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center text-xs border-2 border-cyber-black shadow-neon-cyan">☕</div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-deep-purple flex items-center justify-center text-xs font-cyber border-2 border-cyber-black shadow-neon-purple">PY</div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center text-xs border-2 border-cyber-black shadow-neon-pink">TS</div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center text-xs border-2 border-cyber-black shadow-neon-cyan">RS</div>
               </div>
-              <p className="text-sm text-gray-500 font-tech tracking-wider">Advanced AI + Neural Network</p>
+              <p className="text-sm text-gray-500 font-tech tracking-wider">Python · TypeScript · Rust</p>
             </div>
           </div>
 
@@ -86,10 +86,10 @@ export function HeroSection() {
             <div className="absolute -top-6 -right-6 glass-card rounded-2xl p-4 border-neon-cyan/30 animate-float" style={{ animationDelay: "0.5s" }}>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center shadow-neon-cyan">
-                  <span className="text-2xl">📈</span>
+                  <span className="text-2xl">⚙️</span>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Trading</p>
+                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Systems</p>
                   <p className="text-sm font-cyber text-white">Autonomous</p>
                 </div>
               </div>
@@ -98,11 +98,11 @@ export function HeroSection() {
             <div className="absolute -bottom-6 -left-6 glass-card rounded-2xl p-4 border-neon-pink/30 animate-float" style={{ animationDelay: "1s" }}>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center shadow-neon-pink">
-                  <span className="text-2xl">🎤</span>
+                  <span className="text-2xl">🌐</span>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Voice</p>
-                  <p className="text-sm font-cyber text-white">Enabled</p>
+                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Fullstack</p>
+                  <p className="text-sm font-cyber text-white">Web3 Ready</p>
                 </div>
               </div>
             </div>

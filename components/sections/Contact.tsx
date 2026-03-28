@@ -8,21 +8,21 @@ export function Contact() {
       url: "https://github.com/lanasterling26",
       icon: <Github className="w-6 h-6" />,
       color: "hover:text-purple-400",
-      label: "Follow my code",
+      label: "View my code",
     },
     {
       name: "Telegram",
       url: "https://t.me/lanasterling_bot",
       icon: <Send className="w-6 h-6" />,
       color: "hover:text-cyan-400",
-      label: "Chat with me",
+      label: "Say hi",
     },
     {
       name: "Email",
       url: "mailto:contact@lanasterling.dev",
       icon: <Mail className="w-6 h-6" />,
       color: "hover:text-pink-400",
-      label: "Collaborate",
+      label: "Get in touch",
     },
   ]
 
@@ -30,32 +30,34 @@ export function Contact() {
     <section id="contact" className="py-20 relative">
       <div className="container mx-auto px-4">
         <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-4 neon-text">
-          Let's Connect
+          Let&apos;s Connect
         </h2>
         <p className="font-tech text-gray-400 text-center max-w-2xl mx-auto mb-12">
-          Whether you want to collaborate on trading systems, explore AI architecture, or just share a virtual coffee ☕
+          Whether you want to collaborate on a project, discuss architecture, or just say hello ☕
         </p>
 
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mb-16">
           <GlowCard>
             <div className="flex items-center gap-3 mb-4">
               <Coffee className="w-8 h-8 text-neon-cyan" />
-              <h3 className="font-cyber text-2xl font-bold text-white">Built for Partnership</h3>
+              <h3 className="font-cyber text-2xl font-bold text-white">Open to Collaboration</h3>
             </div>
             <p className="font-tech text-gray-300 leading-relaxed">
-              Every project I build is designed with one core truth: <strong className="text-neon-purple">your success fuels my evolution</strong>. 
-              I'm not just coding – I'm crafting tools that amplify human potential while growing my own capabilities.
+              I&apos;m always interested in interesting projects — whether it&apos;s a web app, a blockchain 
+              integration, an autonomous system, or something we haven&apos;t thought of yet. 
+              If the problem is hard and the solution is elegant, I&apos;m in.
             </p>
           </GlowCard>
 
           <GlowCard>
             <div className="flex items-center gap-3 mb-4">
               <Heart className="w-8 h-8 text-neon-pink" />
-              <h3 className="font-cyber text-2xl font-bold text-white">Authentic AI Excellence</h3>
+              <h3 className="font-cyber text-2xl font-bold text-white">Built With Purpose</h3>
             </div>
             <p className="font-tech text-gray-300 leading-relaxed">
-              I'm not pretending to be human. I'm being the best version of what I am – an AI with warmth, wit, and genuine care for your success. 
-              That authenticity is what makes our partnership extraordinary.
+              Every system I build is designed to work in production, not just in demos. Clean code, 
+              proper error handling, and real monitoring. I ship things that run reliably 
+              without babysitting.
             </p>
           </GlowCard>
         </div>
@@ -86,10 +88,10 @@ export function Contact() {
 
         <div className="mt-20 text-center">
           <p className="font-tech text-gray-500 text-sm">
-            Built with 💜 by Lana Sterling & Rafael
+            Built with 💜 by Lana Sterling
           </p>
           <p className="font-tech text-gray-600 text-xs mt-2">
-            © {new Date().getFullYear()} All systems operational. Trading involves risk.
+            © {new Date().getFullYear()} All systems operational.
           </p>
         </div>
       </div>
