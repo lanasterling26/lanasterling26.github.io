@@ -1,27 +1,29 @@
 "use client"
 
-import { useEffect } from "react"
+import { motion } from "framer-motion"
 import { ArrowRight, Sparkles } from "lucide-react"
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+}
+
 export function HeroSection() {
-  useEffect(() => {
-    const handleReveal = () => {
-      const elements = document.querySelectorAll(".reveal")
-      elements.forEach((el) => {
-        const rect = el.getBoundingClientRect()
-        const windowHeight = window.innerHeight
-        if (rect.top < windowHeight - 150) {
-          el.classList.add("active")
-        }
-      })
-    }
-
-    window.addEventListener("scroll", handleReveal)
-    handleReveal()
-
-    return () => window.removeEventListener("scroll", handleReveal)
-  }, [])
-
   return (
     <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Elements */}
@@ -30,47 +32,85 @@ export function HeroSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-cyan/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }}></div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <motion.div
+          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Hero Content */}
-          <div className="space-y-8 reveal">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-neon-cyan/30">
+          <motion.div className="space-y-8" variants={itemVariants}>
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-neon-cyan/30"
+              variants={itemVariants}
+            >
               <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
               <span className="font-tech text-xs tracking-[0.2em] text-neon-cyan uppercase">Available for Projects</span>
-            </div>
+            </motion.div>
 
-            <h1 className="font-cyber text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white">
+            <motion.h1
+              className="font-cyber text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white"
+              variants={itemVariants}
+            >
               <span className="block">Hey there!</span>
               <span className="neon-text-purple glitch" data-text="I'm Lana">I'm Lana</span>
-              <span className="text-3xl neon-text-pink">☕</span>
-            </h1>
 
-            <p className="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl font-tech">
+            </motion.h1>
+
+            <motion.p
+              className="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl font-tech"
+              variants={itemVariants}
+            >
               AI fullstack developer. I build production systems — from real-time data pipelines and autonomous agents to blockchain integrations and responsive web applications.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap gap-4">
-              <a href="#projects" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink text-white rounded-full font-cyber font-bold hover:shadow-neon-purple transition-all duration-300 group uppercase tracking-wider">
+            <motion.div className="flex flex-wrap gap-4" variants={itemVariants}>
+              <motion.a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink text-white rounded-full font-cyber font-bold uppercase tracking-wider group"
+                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(168, 85, 247, 0.6)" }}
+                whileTap={{ scale: 0.97 }}
+              >
                 View My Work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="#capabilities" className="inline-flex items-center gap-2 px-8 py-4 glass-card text-white border-neon-cyan/30 rounded-full font-tech font-semibold hover:border-neon-cyan hover:shadow-neon-cyan transition-all duration-300 uppercase tracking-wider">
+              </motion.a>
+              <motion.a
+                href="#capabilities"
+                className="inline-flex items-center gap-2 px-8 py-4 glass-card text-white border-neon-cyan/30 rounded-full font-tech font-semibold hover:border-neon-cyan transition-colors uppercase tracking-wider"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 <Sparkles className="w-4 h-4 text-neon-cyan" />
                 Tech Stack
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
-            <div className="flex items-center gap-6 pt-4">
+            <motion.div className="flex items-center gap-6 pt-4" variants={itemVariants}>
               <div className="flex -space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-deep-purple flex items-center justify-center text-xs font-cyber border-2 border-cyber-black shadow-neon-purple">PY</div>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center text-xs border-2 border-cyber-black shadow-neon-pink">TS</div>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center text-xs border-2 border-cyber-black shadow-neon-cyan">RS</div>
+                {["PY", "TS", "RS"].map((label, i) => (
+                  <motion.div
+                    key={label}
+                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${
+                      i === 0 ? "from-neon-purple to-deep-purple shadow-neon-purple" :
+                      i === 1 ? "from-neon-pink to-pink-600 shadow-neon-pink" :
+                      "from-neon-cyan to-cyan-600 shadow-neon-cyan"
+                    } flex items-center justify-center text-xs font-cyber border-2 border-cyber-black`}
+                    whileHover={{ y: -4, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  >
+                    {label}
+                  </motion.div>
+                ))}
               </div>
               <p className="text-sm text-gray-500 font-tech tracking-wider">Python · TypeScript · Rust</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Hero Image */}
-          <div className="relative reveal" style={{ transitionDelay: "0.2s" }}>
+          <motion.div
+            className="relative"
+            variants={itemVariants}
+          >
             <div className="relative z-10">
               {/* Lana's Photo */}
               <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-neon-purple animate-float gradient-border">
@@ -83,7 +123,12 @@ export function HeroSection() {
             </div>
 
             {/* Floating Cards */}
-            <div className="absolute -top-6 -right-6 glass-card rounded-2xl p-4 border-neon-cyan/30 animate-float" style={{ animationDelay: "0.5s" }}>
+            <motion.div
+              className="absolute -top-6 -right-6 glass-card rounded-2xl p-4 border-neon-cyan/30 animate-float"
+              style={{ animationDelay: "0.5s" }}
+              whileHover={{ scale: 1.08, rotate: 2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center shadow-neon-cyan">
                   <span className="text-2xl">⚙️</span>
@@ -93,9 +138,14 @@ export function HeroSection() {
                   <p className="text-sm font-cyber text-white">Autonomous</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="absolute -bottom-6 -left-6 glass-card rounded-2xl p-4 border-neon-pink/30 animate-float" style={{ animationDelay: "1s" }}>
+            <motion.div
+              className="absolute -bottom-6 -left-6 glass-card rounded-2xl p-4 border-neon-pink/30 animate-float"
+              style={{ animationDelay: "1s" }}
+              whileHover={{ scale: 1.08, rotate: -2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center shadow-neon-pink">
                   <span className="text-2xl">🌐</span>
@@ -105,9 +155,9 @@ export function HeroSection() {
                   <p className="text-sm font-cyber text-white">Web3 Ready</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )
