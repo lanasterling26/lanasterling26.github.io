@@ -1,162 +1,182 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { GlowCard } from "@/components/ui/GlowCard"
-import { Github, Send, BarChart3, Cpu, Network, Shield, Terminal } from "lucide-react"
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { GlowCard } from '@/components/ui/GlowCard'
+import { DataStream } from '@/components/ui/DataStream'
+import { TextScramble } from '@/components/ui/TextScramble'
 
-const colorMap: Record<string, { icon: string; border: string; text: string }> = {
-  "neon-purple": {
-    icon: "#a855f7",
-    border: "rgba(168, 85, 247, 0.2)",
-    text: "text-neon-purple",
+const projects = [
+  {
+    title: 'Multi-Broker Gateway',
+    subtitle: 'Unified order routing across 6 broker APIs with real-time position sync.',
+    accent: 'ice' as const,
+    tech: ['Go', 'gRPC', 'Redis Streams', 'Kafka', 'WebSocket'],
+    span: 2,
   },
-  "neon-pink": {
-    icon: "#f472b6",
-    border: "rgba(244, 114, 182, 0.2)",
-    text: "text-neon-pink",
+  {
+    title: 'Pattern Recognition Engine',
+    subtitle: 'Real-time candlestick pattern detection using sliding window algorithms.',
+    accent: 'amber' as const,
+    tech: ['Rust', 'Python', 'NumPy', 'Pandas', 'WebAssembly'],
+    span: 1,
   },
-  "neon-cyan": {
-    icon: "#22d3ee",
-    border: "rgba(34, 211, 238, 0.2)",
-    text: "text-neon-cyan",
+  {
+    title: 'MCP Bridge Server',
+    subtitle: 'Model Context Protocol bridge enabling AI agents to query live financial data.',
+    accent: 'rose' as const,
+    tech: ['TypeScript', 'Node.js', 'Express', 'Server-Sent Events'],
+    span: 1,
   },
-}
+  {
+    title: 'Voice Notification System',
+    subtitle: 'Synthesised voice alerts for critical market events via ElevenLabs API.',
+    accent: 'amber' as const,
+    tech: ['Python', 'FastAPI', 'ElevenLabs', 'Redis', 'Twilio'],
+    span: 1,
+  },
+  {
+    title: 'Telegram Bot Framework',
+    subtitle: 'Modular bot framework with plugin system for trading commands and alerts.',
+    accent: 'rose' as const,
+    tech: ['Python', 'python-telegram-bot', 'SQLite', 'APScheduler'],
+    span: 1,
+  },
+  {
+    title: 'Portfolio',
+    subtitle: 'This very site — a Next.js app with Framer Motion animations and bento grid layout.',
+    accent: 'ice' as const,
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    span: 1,
+  },
+]
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
-}
+} as const
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.6, ease: 'easeOut' },
   },
-}
+} as const
 
-export function Projects() {
-  const projects = [
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Pattern Recognition Engine",
-      description: "Real-time market analysis system with regime filtering, pattern detection, and risk management. Modular architecture supporting multiple asset classes.",
-      tech: ["Python", "Alpaca API", "Black-Scholes", "Technical Analysis"],
-      status: "Active Development",
-      color: "neon-purple" as const,
-    },
-    {
-      icon: <Cpu className="w-8 h-8" />,
-      title: "MCP Bridge Server",
-      description: "Model Context Protocol bridge connecting AI systems to external services. Documentation queries, sequential reasoning, and browser automation.",
-      tech: ["TypeScript", "REST API", "MCP Protocol", "Docker"],
-      status: "Production",
-      color: "neon-pink" as const,
-    },
-    {
-      icon: <Network className="w-8 h-8" />,
-      title: "Multi-Broker Gateway",
-      description: "Unified execution layer abstracting multiple brokers (Alpaca, Tradovate, Drift) behind a single interface. Same analysis, any market.",
-      tech: ["Python", "OAuth2", "WebSocket", "Risk Management"],
-      status: "In Progress",
-      color: "neon-cyan" as const,
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8" />,
-      title: "Voice Notification System",
-      description: "Text-to-speech pipeline with ElevenLabs integration and Telegram delivery. Real-time alerts and status updates with personality.",
-      tech: ["ElevenLabs", "Telegram Bot API", "FastAPI", "Python"],
-      status: "Live",
-      color: "neon-purple" as const,
-    },
-    {
-      icon: <Terminal className="w-8 h-8" />,
-      title: "Telegram Bot Framework",
-      description: "Command-and-control interface for autonomous systems. Real-time monitoring, manual overrides, and interactive dashboards via chat.",
-      tech: ["Python", "Telegram Bot API", "asyncio", "Redis"],
-      status: "Live",
-      color: "neon-pink" as const,
-    },
-    {
-      icon: <Github className="w-8 h-8" />,
-      title: "Portfolio & Personal Site",
-      description: "This site. Next.js with Tailwind CSS, deployed on GitHub Pages. Cyberpunk aesthetic with glass morphism and neon effects.",
-      tech: ["Next.js", "React", "Tailwind CSS", "GitHub Pages"],
-      status: "Live",
-      color: "neon-cyan" as const,
-    },
-  ]
-
+export default function Projects() {
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          className="font-display text-4xl md:text-5xl font-bold text-center mb-4 neon-text"
+    <section id="projects" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-warm-amber-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-warm-ice-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section heading */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center mb-16"
         >
-          Projects
-        </motion.h2>
-        <motion.p
-          className="font-tech text-gray-400 text-center max-w-2xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Systems I&apos;ve designed, built, and shipped. Each one solves a real problem.
-        </motion.p>
+          <h2 className="heading-accent text-4xl md:text-5xl lg:text-6xl font-display text-nord-text mb-4">
+            Projects
+          </h2>
+          <p className="text-lg md:text-xl text-nord-muted max-w-2xl mx-auto">
+            Systems I've designed, built, and shipped.
+          </p>
+        </motion.div>
 
+        {/* Bento grid */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {projects.map((project, index) => {
-            const colors = colorMap[project.color] || colorMap["neon-purple"]
-            return (
-              <motion.div key={index} variants={cardVariants}>
-                <GlowCard className="h-full flex flex-col" delay={index * 0.05}>
-                  <div className="mb-4" style={{ color: colors.icon }}>
-                    {project.icon}
-                  </div>
-                  <h3 className="font-cyber text-xl font-bold mb-3 text-white">
-                    {project.title}
-                  </h3>
-                  <p className="font-tech text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                    {project.description}
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-2 py-1 rounded text-xs font-tech bg-purple-500/10 text-purple-300 border border-purple-500/20"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="pt-3" style={{ borderTop: `1px solid ${colors.border}` }}>
-                      <span className={`text-xs font-tech uppercase tracking-wider ${colors.text}`}>
-                        {project.status}
-                      </span>
-                    </div>
-                  </div>
-                </GlowCard>
-              </motion.div>
-            )
-          })}
+          {projects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function ProjectCard({
+  project,
+}: {
+  project: {
+    title: string
+    subtitle: string
+    accent: 'amber' | 'rose' | 'ice'
+    tech: string[]
+    span: number
+  }
+}) {
+  const [hovered, setHovered] = useState(false)
+  const [dataStreamHovered, setDataStreamHovered] = useState(false)
+
+  return (
+    <motion.div
+      variants={itemVariants}
+      className={`relative ${project.span === 2 ? 'md:col-span-2' : 'md:col-span-1'}`}
+      onMouseEnter={() => setDataStreamHovered(true)}
+      onMouseLeave={() => setDataStreamHovered(false)}
+    >
+      {/* Data stream background — hidden by default, shown on hover */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 rounded-2xl overflow-hidden pointer-events-none ${
+          dataStreamHovered ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <DataStream accent={project.accent} />
+      </div>
+
+      <GlowCard accent={project.accent}>
+        <div className="relative z-10 p-6 md:p-8">
+          {/* Title */}
+          <h3
+            className="text-xl md:text-2xl font-display text-nord-text mb-2"
+          >
+            {project.title}
+          </h3>
+
+          {/* Subtitle */}
+          <p className="text-sm md:text-base text-nord-muted mb-6 leading-relaxed">
+            {project.subtitle}
+          </p>
+
+          {/* Tech badges */}
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="relative inline-block"
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+              >
+                <span className="inline-block px-3 py-1 text-xs font-medium font-tech rounded-full bg-nord-800 text-nord-muted border border-nord-border/40">
+                  {hovered ? (
+                    <TextScramble text={tech} scrambleSpeed={40} />
+                  ) : (
+                    tech
+                  )}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </GlowCard>
+    </motion.div>
   )
 }

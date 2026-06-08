@@ -1,22 +1,17 @@
 import type { Metadata } from "next"
-import { Inter, Orbitron, Rajdhani, Syncopate } from "next/font/google"
+import { Inter, Fraunces, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
-const orbitron = Orbitron({
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-orbitron",
+  weight: ["300", "400", "500", "600", "700", "900"],
+  variable: "--font-fraunces",
 })
-const rajdhani = Rajdhani({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-rajdhani",
-})
-const syncopate = Syncopate({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-syncopate",
+  variable: "--font-jetbrains-mono",
 })
 
 export const metadata: Metadata = {
@@ -33,10 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.className} ${orbitron.variable} ${rajdhani.variable} ${syncopate.variable} antialiased`}
+        className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable} font-body antialiased`}
       >
-        <div className="city-lights" />
-        <div className="scanlines relative z-10">{children}</div>
+        <div className="warm-ambient" />
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   )

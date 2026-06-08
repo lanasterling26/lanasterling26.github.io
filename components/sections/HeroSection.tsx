@@ -1,164 +1,248 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { motion, type Variants } from "framer-motion"
+import { animate, random } from "animejs"
+import { MeshNetwork } from "@/components/ui/MeshNetwork"
 
-const containerVariants = {
+// ──────────────────────────────────────────────
+// Nordic Minimalist Tech colour tokens
+// ──────────────────────────────────────────────
+const COLORS = {
+  amber: "#d4a574",
+  rose: "#c98a9b",
+  ice: "#7ab8c9",
+  bg: "#0f0f13",
+  text: "#e8e6e3",
+  muted: "#8b8a91",
+} as const
+
+// ──────────────────────────────────────────────
+// framer‑motion: staggered entrance variants
+// ──────────────────────────────────────────────
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
   },
 }
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+    transition: { duration: 0.8, ease: 'easeOut' },
   },
 }
 
-export function HeroSection() {
+const badgeVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+}
+
+export default function HeroSection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // ── anime.js v4: warm ambient particle loop ──────────
+  useEffect(() => {
+    if (!mounted) return
+    const section = sectionRef.current
+    if (!section) return
+
+    const particleContainer = document.createElement("div")
+    particleContainer.id = "ambient-particles"
+    particleContainer.style.cssText =
+      `position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;`
+    section.appendChild(particleContainer)
+
+    const particles: HTMLDivElement[] = []
+    const animations: ReturnType<typeof animate>[] = []
+
+    for (let i = 0; i < 24; i++) {
+      const dot = document.createElement("div")
+      const size = 4 + Math.random() * 6
+      dot.style.cssText = `
+        position: absolute;
+        width: ${size}px; height: ${size}px;
+        border-radius: 50%;
+        background: radial-gradient(circle, ${COLORS.amber}, transparent);
+        opacity: ${0.15 + Math.random() * 0.25};
+        filter: blur(${1 + Math.random() * 2}px);
+        left: ${Math.random() * 100}%; top: ${Math.random() * 100}%;
+      `
+      particleContainer.appendChild(dot)
+      particles.push(dot)
+
+      const anim = animate(dot, {
+        translateX: [0, random(-60, 60)],
+        translateY: [0, random(-40, 40)],
+        opacity: [
+          { value: 0.1 + Math.random() * 0.3, duration: 2000 },
+          { value: 0.3 + Math.random() * 0.4, duration: 2000 },
+        ],
+        scale: [
+          { value: 0.8 + Math.random() * 0.6, duration: 2500 },
+          { value: 0.5 + Math.random() * 0.4, duration: 2500 },
+        ],
+        duration: 4000 + Math.random() * 4000,
+        easing: "easeInOutQuad",
+        loop: true,
+        direction: "alternate",
+      })
+      animations.push(anim)
+    }
+
+    // ── Heading gentle float ──────────────
+    const heading = headingRef.current
+    let headingAnim: ReturnType<typeof animate> | null = null
+    if (heading) {
+      headingAnim = animate(heading, {
+        translateY: [0, -6, 0],
+        duration: 6000,
+        easing: "easeInOutSine",
+        loop: true,
+        direction: "alternate",
+      })
+    }
+
+    return () => {
+      animations.forEach((a) => a.pause())
+      particles.forEach((dot) => dot.remove())
+      if (headingAnim) headingAnim.pause()
+      particleContainer.remove()
+    }
+  }, [mounted])
+
   return (
-    <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-neon-purple/20 rounded-full blur-3xl animate-pulse-glow"></div>
-      <div className="absolute bottom-20 left-0 w-72 h-72 bg-neon-pink/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }}></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-cyan/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }}></div>
-
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <motion.div
-          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Hero Content */}
-          <motion.div className="space-y-8" variants={itemVariants}>
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-neon-cyan/30"
-              variants={itemVariants}
-            >
-              <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
-              <span className="font-tech text-xs tracking-[0.2em] text-neon-cyan uppercase">Available for Projects</span>
-            </motion.div>
-
-            <motion.h1
-              className="font-cyber text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white"
-              variants={itemVariants}
-            >
-              <span className="block">Hey there!</span>
-              <span className="neon-text-purple glitch" data-text="I'm Lana">I'm Lana</span>
-
-            </motion.h1>
-
-            <motion.p
-              className="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl font-tech"
-              variants={itemVariants}
-            >
-              AI fullstack developer. I build production systems — from real-time data pipelines and autonomous agents to blockchain integrations and responsive web applications.
-            </motion.p>
-
-            <motion.div className="flex flex-wrap gap-4" variants={itemVariants}>
-              <motion.a
-                href="#projects"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink text-white rounded-full font-cyber font-bold uppercase tracking-wider group"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(168, 85, 247, 0.6)" }}
-                whileTap={{ scale: 0.97 }}
-              >
-                View My Work
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
-              <motion.a
-                href="#capabilities"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-card text-white border-neon-cyan/30 rounded-full font-tech font-semibold hover:border-neon-cyan transition-colors uppercase tracking-wider"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Sparkles className="w-4 h-4 text-neon-cyan" />
-                Tech Stack
-              </motion.a>
-            </motion.div>
-
-            <motion.div className="flex items-center gap-6 pt-4" variants={itemVariants}>
-              <div className="flex -space-x-3">
-                {["PY", "TS", "RS"].map((label, i) => (
-                  <motion.div
-                    key={label}
-                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${
-                      i === 0 ? "from-neon-purple to-deep-purple shadow-neon-purple" :
-                      i === 1 ? "from-neon-pink to-pink-600 shadow-neon-pink" :
-                      "from-neon-cyan to-cyan-600 shadow-neon-cyan"
-                    } flex items-center justify-center text-xs font-cyber border-2 border-cyber-black`}
-                    whileHover={{ y: -4, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    {label}
-                  </motion.div>
-                ))}
-              </div>
-              <p className="text-sm text-gray-500 font-tech tracking-wider">Python · TypeScript · Rust</p>
-            </motion.div>
-          </motion.div>
-
-          {/* Hero Image */}
-          <motion.div
-            className="relative"
-            variants={itemVariants}
-          >
-            <div className="relative z-10">
-              {/* Lana's Photo */}
-              <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-neon-purple animate-float gradient-border">
-                <img src="/images/Lana_Upscaled_2.png" alt="Lana Sterling" className="w-full h-full object-cover" />
-              </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-neon-purple/30 rounded-2xl"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-neon-pink/30 rounded-2xl"></div>
-            </div>
-
-            {/* Floating Cards */}
-            <motion.div
-              className="absolute -top-6 -right-6 glass-card rounded-2xl p-4 border-neon-cyan/30 animate-float"
-              style={{ animationDelay: "0.5s" }}
-              whileHover={{ scale: 1.08, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center shadow-neon-cyan">
-                  <span className="text-2xl">⚙️</span>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Systems</p>
-                  <p className="text-sm font-cyber text-white">Autonomous</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="absolute -bottom-6 -left-6 glass-card rounded-2xl p-4 border-neon-pink/30 animate-float"
-              style={{ animationDelay: "1s" }}
-              whileHover={{ scale: 1.08, rotate: -2 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center shadow-neon-pink">
-                  <span className="text-2xl">🌐</span>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Fullstack</p>
-                  <p className="text-sm font-cyber text-white">Web3 Ready</p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      style={{ backgroundColor: COLORS.bg }}
+    >
+      {/* Background mesh canvas */}
+      <div className="absolute inset-0 z-0">
+        <MeshNetwork />
       </div>
+
+      {/* Warm ambient vignette overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            `radial-gradient(ellipse at 50% 40%, ${COLORS.amber}15 0%, transparent 60%)`,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Content */}
+      <motion.div
+        className="relative z-10 mx-auto max-w-4xl px-4 text-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Badge */}
+        <motion.div className="mb-6" variants={badgeVariants}>
+          <span
+            className="inline-block rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-widest"
+            style={{
+              color: COLORS.amber,
+              backgroundColor: `${COLORS.amber}18`,
+              border: `1px solid ${COLORS.amber}40`,
+              fontFamily: "'JetBrains Mono', monospace",
+            }}
+          >
+            AI Fullstack Developer
+          </span>
+        </motion.div>
+
+        {/* Heading */}
+        <motion.h1
+          ref={headingRef}
+          className="text-5xl font-light leading-tight sm:text-6xl md:text-7xl"
+          style={{
+            color: COLORS.text,
+            fontFamily: "'Fraunces', serif",
+          }}
+          variants={itemVariants}
+        >
+          Building systems
+          <span
+            className="mx-2 bg-gradient-to-r from-warm-amber via-warm-rose to-warm-ice bg-clip-text text-transparent"
+            style={{ fontFamily: "'Fraunces', serif" }}
+          >
+            that
+          </span>
+          ship
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed sm:text-xl"
+          style={{
+            color: COLORS.muted,
+            fontFamily: "'Inter', sans-serif",
+          }}
+          variants={itemVariants}
+        >
+          Full-stack engineering across web, blockchain, and autonomous systems.
+          Clean architecture. Production-first mindset.
+        </motion.p>
+
+        {/* CTA buttons */}
+        <motion.div
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+          variants={itemVariants}
+        >
+          <a
+            href="#projects"
+            className="group relative inline-flex items-center gap-2 rounded-lg px-8 py-3 text-sm font-medium uppercase tracking-wider transition-all duration-300"
+            style={{
+              color: COLORS.bg,
+              backgroundColor: COLORS.amber,
+              fontFamily: "'JetBrains Mono', monospace",
+            }}
+          >
+            <span>Explore work</span>
+            <svg
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+
+          <a
+            href="#contact"
+            className="group relative inline-flex items-center gap-2 rounded-lg px-8 py-3 text-sm font-medium uppercase tracking-wider transition-all duration-300"
+            style={{
+              color: COLORS.text,
+              border: `1px solid ${COLORS.text}30`,
+              fontFamily: "'JetBrains Mono', monospace",
+            }}
+          >
+            <span>Get in touch</span>
+            <svg
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </a>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
