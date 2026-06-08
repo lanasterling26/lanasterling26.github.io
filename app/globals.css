@@ -292,17 +292,6 @@ body {
     inset 0 0 15px rgba(168, 85, 247, 0.1);
 }
 
-/* 3D Depth Card Effect */
-.depth-card {
-  transition: box-shadow 0.3s ease;
-}
-
-.depth-card:hover {
-  box-shadow:
-    0 20px 60px rgba(168, 85, 247, 0.3),
-    0 0 40px rgba(34, 211, 238, 0.15);
-}
-
 /* Selection style */
 ::selection {
   background: rgba(168, 85, 247, 0.4);

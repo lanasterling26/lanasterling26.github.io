@@ -1,35 +1,10 @@
 "use client"
 
 import { ArrowRight, Sparkles } from "lucide-react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { TypewriterText, SplitText } from "@/components/effects/TypewriterText"
-import { useRef } from "react"
 
 export function HeroSection() {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 })
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 })
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [8, -8])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-8, 8])
-
-  function handleMouseMove(e: React.MouseEvent) {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const px = (e.clientX - rect.left) / rect.width - 0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5
-    x.set(px)
-    y.set(py)
-  }
-
-  function handleMouseLeave() {
-    x.set(0)
-    y.set(0)
-  }
-
   return (
     <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Elements */}
@@ -123,41 +98,28 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Hero Image — 3D hover effect */}
+          {/* Hero Image */}
           <motion.div
             className="relative"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
           >
-            <div className="relative z-10" style={{ perspective: "1200px" }}>
-              {/* Lana's Photo with 3D depth */}
-              <motion.div
-                ref={cardRef}
-                className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-neon-purple gradient-border depth-card"
-                style={{ rotateX, rotateY }}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
+            <div className="relative z-10">
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-neon-purple gradient-border">
                 <img
                   src="/images/Lana_Upscaled_2.png"
                   alt="Lana Sterling"
                   className="w-full h-full object-cover"
                 />
-
-                {/* Inner shadow overlay for depth */}
-                <div className="absolute inset-0 shadow-[inset_0_0_80px_rgba(0,0,0,0.4)] pointer-events-none rounded-3xl"></div>
-
-                {/* Gradient edge glow */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-cyan-900/10 pointer-events-none rounded-3xl"></div>
-              </motion.div>
+              </div>
 
               {/* Decorative Elements */}
               <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-neon-purple/30 rounded-2xl"></div>
               <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-neon-pink/30 rounded-2xl"></div>
             </div>
 
-            {/* Floating Cards — repositioned to bottom-right, outside the image so they don't overlap */}
+            {/* Floating Cards */}
             <div className="absolute -bottom-8 sm:-bottom-10 right-0 sm:-right-8 glass-card rounded-2xl p-3 sm:p-4 border-neon-cyan/30 animate-float z-20" style={{ animationDelay: "0.5s" }}>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center shadow-neon-cyan">
