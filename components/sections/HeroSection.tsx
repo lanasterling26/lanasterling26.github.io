@@ -3,21 +3,14 @@
 import { ArrowRight, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
 import { TypewriterText, SplitText } from "@/components/effects/TypewriterText"
-import { MouseParallax, ParallaxLayer } from "@/components/effects/MouseParallax"
 
 export function HeroSection() {
   return (
     <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Elements */}
-      <ParallaxLayer speed={-0.3}>
-        <div className="absolute top-20 right-0 w-96 h-96 bg-neon-purple/20 rounded-full blur-3xl animate-pulse-glow"></div>
-      </ParallaxLayer>
-      <ParallaxLayer speed={0.2}>
-        <div className="absolute bottom-20 left-0 w-72 h-72 bg-neon-pink/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }}></div>
-      </ParallaxLayer>
-      <ParallaxLayer speed={-0.1}>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-cyan/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: "2s" }}></div>
-      </ParallaxLayer>
+      <div className="absolute top-20 right-0 w-96 h-96 bg-neon-purple/20 rounded-full blur-3xl animate-pulse-glow"></div>
+      <div className="absolute bottom-20 left-0 w-72 h-72 bg-neon-pink/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }}></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-cyan/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: "2s" }}></div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -58,14 +51,7 @@ export function HeroSection() {
               >
                 <SplitText text="I'm Lana" delay={1.0} />
               </motion.span>
-              <motion.span
-                className="text-3xl neon-text-pink ml-2 inline-block"
-                initial={{ rotate: -180, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ delay: 1.8, duration: 0.6, type: "spring" }}
-              >
-                ☕
-              </motion.span>
+
             </h1>
 
             <motion.p
@@ -112,55 +98,62 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Hero Image */}
-          <MouseParallax>
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-            >
-              <div className="relative z-10">
-                {/* Lana's Photo */}
-                <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-neon-purple animate-float gradient-border">
-                  <img src="/images/Lana_Upscaled_2.png" alt="Lana Sterling" className="w-full h-full object-cover" />
-                </div>
+          {/* Hero Image — Static with time-travel glitch */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+          >
+            <div className="relative z-10">
+              {/* Lana's Photo with Time-Travel Glitch Effect */}
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-neon-purple gradient-border time-glitch-container">
+                <img
+                  src="/images/Lana_Upscaled_2.png"
+                  alt="Lana Sterling"
+                  className="w-full h-full object-cover time-glitch-image"
+                />
 
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-neon-purple/30 rounded-2xl"></div>
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-neon-pink/30 rounded-2xl"></div>
+                {/* Scan-line glitch overlay */}
+                <div className="absolute inset-0 glitch-scanlines pointer-events-none"></div>
+
+                {/* Chromatic aberration overlay on glitch */}
+                <div className="absolute inset-0 glitch-chromatic pointer-events-none"></div>
+
+                {/* Glitch flash overlay */}
+                <div className="absolute inset-0 glitch-flash pointer-events-none"></div>
               </div>
 
-              {/* Floating Cards with parallax */}
-              <ParallaxLayer speed={0.5}>
-                <div className="absolute -top-6 -right-6 glass-card rounded-2xl p-4 border-neon-cyan/30 animate-float" style={{ animationDelay: "0.5s" }}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center shadow-neon-cyan">
-                      <span className="text-2xl">📈</span>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Trading</p>
-                      <p className="text-sm font-cyber text-white">Autonomous</p>
-                    </div>
-                  </div>
-                </div>
-              </ParallaxLayer>
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-neon-purple/30 rounded-2xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-neon-pink/30 rounded-2xl"></div>
+            </div>
 
-              <ParallaxLayer speed={-0.4}>
-                <div className="absolute -bottom-6 -left-6 glass-card rounded-2xl p-4 border-neon-pink/30 animate-float" style={{ animationDelay: "1s" }}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center shadow-neon-pink">
-                      <span className="text-2xl">🎤</span>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Voice</p>
-                      <p className="text-sm font-cyber text-white">Enabled</p>
-                    </div>
-                  </div>
+            {/* Floating Cards — repositioned to bottom-right, outside the image so they don't overlap */}
+            <div className="absolute -bottom-8 sm:-bottom-10 right-0 sm:-right-8 glass-card rounded-2xl p-3 sm:p-4 border-neon-cyan/30 animate-float z-20" style={{ animationDelay: "0.5s" }}>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-neon-cyan to-cyan-600 flex items-center justify-center shadow-neon-cyan">
+                  <span className="text-xl sm:text-2xl">📈</span>
                 </div>
-              </ParallaxLayer>
-            </motion.div>
-          </MouseParallax>
+                <div>
+                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Trading</p>
+                  <p className="text-sm font-cyber text-white">Autonomous</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -top-6 sm:-top-8 -left-4 sm:-left-6 glass-card rounded-2xl p-3 sm:p-4 border-neon-pink/30 animate-float z-20" style={{ animationDelay: "1s" }}>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-neon-pink to-pink-600 flex items-center justify-center shadow-neon-pink">
+                  <span className="text-xl sm:text-2xl">🎤</span>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 font-tech uppercase tracking-wider">Voice</p>
+                  <p className="text-sm font-cyber text-white">Enabled</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

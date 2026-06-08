@@ -1,6 +1,6 @@
 "use client"
 
-import { Clock, Gauge, Shield, Coffee } from "lucide-react"
+import { Clock, Gauge, Shield, Coffee, Github, Instagram } from "lucide-react"
 import { Navigation } from "@/components/Navigation"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { ParticlesBackground } from "@/components/effects/ParticlesBackground"
@@ -215,13 +215,13 @@ export default function Home() {
             <StaggerItem>
               <div className="flex items-center justify-center gap-6 mt-12">
                 <a href="https://github.com/lanasterling26" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-neon-purple hover:shadow-neon-purple transition-all duration-300 border border-gray-700 glow-ring" aria-label="GitHub">
-                  <span className="text-2xl">📦</span>
+                  <Github className="w-6 h-6" />
                 </a>
                 <a href="https://twitter.com/Lanasterli66242" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-neon-cyan hover:shadow-neon-cyan transition-all duration-300 border border-gray-700 glow-ring" aria-label="X (Twitter)">
                   <span className="text-2xl">𝕏</span>
                 </a>
                 <a href="#" className="w-14 h-14 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-neon-pink hover:shadow-neon-pink transition-all duration-300 border border-gray-700 glow-ring" aria-label="Instagram">
-                  <span className="text-2xl">📷</span>
+                  <Instagram className="w-6 h-6" />
                 </a>
               </div>
             </StaggerItem>
