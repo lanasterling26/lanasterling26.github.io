@@ -16,6 +16,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  cursor: none;
 }
 
 /* Cyberpunk Background */
@@ -215,4 +216,84 @@ body {
     linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
+}
+
+/* 3D Perspective Utilities */
+.perspective-\[1000px\] {
+  perspective: 1000px;
+}
+
+/* Data Grid Overlay - tech aesthetic */
+.data-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Corner accents for AI/tech feel */
+.corner-accent {
+  position: relative;
+}
+
+.corner-accent::before,
+.corner-accent::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(168, 85, 247, 0.4);
+  border-style: solid;
+  border-width: 0;
+}
+
+.corner-accent::before {
+  top: 8px;
+  left: 8px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.corner-accent::after {
+  bottom: 8px;
+  right: 8px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* Matrix-style rain text (very subtle) */
+.matrix-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.02;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent 20px,
+    rgba(34, 211, 238, 0.5) 20px,
+    rgba(34, 211, 238, 0.5) 21px
+  );
+}
+
+/* Glow ring for interactive elements */
+.glow-ring {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-ring:hover {
+  box-shadow:
+    0 0 15px rgba(168, 85, 247, 0.5),
+    0 0 30px rgba(168, 85, 247, 0.3),
+    inset 0 0 15px rgba(168, 85, 247, 0.1);
+}
+
+/* Selection style */
+::selection {
+  background: rgba(168, 85, 247, 0.4);
+  color: white;
 }
