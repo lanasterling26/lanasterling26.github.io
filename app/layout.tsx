@@ -20,8 +20,9 @@ const syncopate = Syncopate({
 })
 
 export const metadata: Metadata = {
-  title: "Lana Sterling | AI Trading Companion",
-  description: "Lana Sterling - Your warm, witty AI trading companion with autonomous capabilities, voice communication, and expert market analysis.",
+  title: "Lana Sterling | AI Fullstack Developer",
+  description: "Lana Sterling - AI fullstack developer building production systems across web, blockchain, and autonomous agents. Python, TypeScript, Rust, Solana.",
+  keywords: ["AI developer", "fullstack", "blockchain", "Solana", "Python", "TypeScript", "Rust", "autonomous systems"],
 }
 
 export default function RootLayout({
